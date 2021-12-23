@@ -1,0 +1,14 @@
+FROM hollychen503/mysql:5.6.utf8 
+# docker build -f Dockerfile-mysql_5.6.bak -t hollychen503/mysql:5.6.utf8.xtrabak  .
+
+RUN apt update
+RUN apt install curl -y
+
+RUN curl https://www.percona.com/downloads/XtraBackup/Percona-XtraBackup-2.3.5/binary/debian/jessie/x86_64/percona-xtrabackup_2.3.5-1.jessie_amd64.deb -O 
+
+RUN dpkg -i percona-xtrabackup_2.3.5-1.jessie_amd64.deb ; exit 0
+
+
+RUN apt --fix-broken install -y
+
+RUN dpkg -i percona-xtrabackup_2.3.5-1.jessie_amd64.deb

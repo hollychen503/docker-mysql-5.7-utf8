@@ -1,0 +1,28 @@
+FROM debian:buster-20210721-slim
+#FROM debian:buster-20211220
+# docker build -t hollychen503/xtrabak:2.4.21 -f Dockerfile_xtrabak --progress=plain .
+
+LABEL auther="holly 20211223-b"
+
+RUN env
+RUN apt update
+RUN apt install libaio-dev libgssapi-krb5-2 curl -y
+
+RUN du -h -d1; exit 0
+
+COPY percona-xtrabackup-2.4.21-Linux-x86_64.glibc2.12.tar.gz /
+RUN tar xvf percona-xtrabackup-2.4.21-Linux-x86_64.glibc2.12.tar.gz -C /usr/local --strip-components=1
+
+RUN rm -rf  /usr/local/percona-xtrabackup-2.4-test
+RUN rm percona-xtrabackup-2.4.21-Linux-x86_64.glibc2.12.tar.gz
+# RUN ls -lh /
+
+RUN du -h -d1; exit 0
+
+RUN echo "2"
+
+RUN xtrabackup --version
+RUN innobackupex --version
+
+RUN xbstream --help
+
